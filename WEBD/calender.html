@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calendar Month</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: red;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select {
+            padding: 5px;
+            margin-bottom: 10px;
+            width: 150px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #calendar {
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .box {
+            margin: auto;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>Calendar Month</h1>
+        <label for="month">Select Month:</label>
+        <select id="month">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+        </select>
+
+        <label for="year">Select Year:</label>
+        <select id="year">
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <!-- Add more options for desired years -->
+        </select>
+
+        <button onclick="displayCalendar()">Display Calendar</button>
+
+        <div id="calendar"></div>
+    </div>
+
+
+    <script>
+        function displayCalendar() {
+            var monthIndex = document.getElementById("month").value;
+            var year = document.getElementById("year").value;
+
+            var monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+
+            var daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+
+            var calendarHTML = "<h2>" + monthNames[monthIndex] + " " + year + "</h2>";
+            calendarHTML += "<table>";
+            calendarHTML += "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>";
+
+            var date = new Date(year, monthIndex, 1);
+            var dayOfWeek = date.getDay();
+
+            calendarHTML += "<tr>";
+            for (var i = 0; i < dayOfWeek; i++) {
+                calendarHTML += "<td></td>";
+            }
+
+            for (var day = 1; day <= daysInMonth; day++) {
+                calendarHTML += "<td>" + day + "</td>";
+
+                if ((day + dayOfWeek) % 7 === 0) {
+                    calendarHTML += "</tr><tr>";
+                }
+            }
+
+            calendarHTML += "</tr>";
+            calendarHTML += "</table>";
+
+            document.getElementById("calendar").innerHTML = calendarHTML;
+        }
+    </script>
+</body>
+
+</html>

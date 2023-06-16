@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Stopwatch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #timer {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #button-container {
+            text-align: center;
+        }
+
+        .clock {
+            margin-top: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <h1>Stopwatch</h1>
+        <div id="timer">00:00:00</div>
+
+        <div id="button-container">
+            <button onclick="start()">START</button>
+            <button onclick="pause()">PAUSE</button>
+            <button onclick="reset()">RESET</button>
+        </div>
+    </div>
+
+    <script>
+        var timerInterval;
+        var seconds = 0;
+        var minutes = 0;
+        var hours = 0;
+
+        function start() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function pause() {
+            clearInterval(timerInterval);
+        }
+
+        function reset() {
+            clearInterval(timerInterval);
+            seconds = -1;
+            minutes = 0;
+            hours = 0;
+            updateTimer();
+            timerInterval = undefined; // Reset the timerInterval variable
+        }
+
+        function updateTimer() {
+            seconds++;
+            if (seconds === 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes === 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+            var timeString = formatTime(hours) + ":" + formatTime(minutes) + ":" + formatTime(seconds);
+            document.getElementById("timer").textContent = timeString;
+        }
+
+        function formatTime(time) {
+            return time < 10 ? "0" + time : time;
+        }
+    </script>
+</body>
+
+</html>

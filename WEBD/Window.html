@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Window Object Methods</title>
+</head>
+
+<body>
+    <h1>Window Object Methods</h1>
+
+    <script>
+        window.alert("This is an alert message!");
+
+        var name = window.prompt("Enter your name:");
+        window.alert("Hello, " + name + "!");
+
+        var result = window.confirm("Are you sure you want to proceed?");
+        if (result) {
+            window.alert("You clicked OK!");
+        } else {
+            window.alert("You clicked Cancel!");
+        }
+
+        window.open("https://www.example.com");
+
+        window.print();
+    </script>
+</body>
+
+</html>
